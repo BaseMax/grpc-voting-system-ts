@@ -108,8 +108,119 @@ While not a gRPC-specific command, OpenSSL is often used to manage certificates 
 ```
 openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
 ```
+## Database Schema
 
-## Schema
+## User Table
+- `id` (Primary Key, String): Unique identifier for the user.
+- `username` (String): User's username for authentication.
+- `password` (String): Encrypted password for user authentication.
+
+## Candidate Table
+- `id` (Primary Key, String): Unique identifier for the candidate.
+- `name` (String): Name of the candidate.
+- `party` (String): Affiliated political party.
+- `campaign_details` (String): Campaign information and details.
+
+## Election Table
+- `id` (Primary Key, String): Unique identifier for the election.
+- `title` (String): Title of the election.
+- `start_date` (DateTime): Start date and time of the election.
+- `end_date` (DateTime): End date and time of the election.
+- `is_active` (Boolean): Flag indicating if the election is active.
+
+## Vote Table
+- `id` (Primary Key, String): Unique identifier for the vote.
+- `user_id` (Foreign Key, String): References the user who casted the vote.
+- `candidate_id` (Foreign Key, String): References the candidate for whom the vote was casted.
+
+## Notification Table
+- `id` (Primary Key, String): Unique identifier for the notification.
+- `user_id` (Foreign Key, String): References the user to whom the notification is sent.
+- `message` (String): Notification message.
+- `timestamp` (DateTime): Timestamp of when the notification was sent.
+
+## AuditTrail Table
+- `id` (Primary Key, String): Unique identifier for the audit trail entry.
+- `user_id` (Foreign Key, String): References the user who casted the vote.
+- `candidate_id` (Foreign Key, String): References the candidate for whom the vote was casted.
+- `timestamp` (DateTime): Timestamp of when the vote was casted.
+
+## UserProfile Table
+- `id` (Primary Key, String): Unique identifier for the user profile.
+- `user_id` (Foreign Key, String): References the user associated with the profile.
+- `vote_ids` (Array of Strings): References to the IDs of casted votes.
+
+## Admin Table
+- `id` (Primary Key, String): Unique identifier for the admin.
+- `username` (String): Admin's username for authentication.
+- `password` (String): Encrypted password for admin authentication.
+
+## VerificationStatus Table
+- `id` (Primary Key, String): Unique identifier for the verification status entry.
+- `vote_id` (Foreign Key, String): References the ID of the vote to be verified.
+- `verified` (Boolean): Indicates whether the vote has been verified.
+
+## ElectionResult Table
+- `id` (Primary Key, String): Unique identifier for the election result entry.
+- `election_id` (Foreign Key, String): References the ID of the election.
+- `candidate_id` (Foreign Key, String): References the ID of the candidate.
+- `vote_count` (Integer): Number of votes received by the candidate.
+
+## LeaderboardEntry Table
+- `id` (Primary Key, String): Unique identifier for the leaderboard entry.
+- `candidate_id` (Foreign Key, String): References the ID of the candidate.
+- `vote_count` (Integer): Number of votes received by the candidate.
+
+## DashboardNotification Table
+- `id` (Primary Key, String): Unique identifier for the dashboard notification.
+- `user_id` (Foreign Key, String): References the user to whom the notification is sent.
+- `message` (String): Notification message.
+- `timestamp` (DateTime): Timestamp of when the notification was sent.
+
+## DashboardCandidate Table
+- `id` (Primary Key, String): Unique identifier for the dashboard candidate.
+- `candidate_id` (Foreign Key, String): References the ID of the candidate.
+- `name` (String): Name of the candidate.
+- `party` (String): Affiliated political party.
+
+## DashboardElection Table
+- `id` (Primary Key, String): Unique identifier for the dashboard election.
+- `election_id` (Foreign Key, String): References the ID of the election.
+- `title` (String): Title of the election.
+- `start_date` (DateTime): Start date and time of the election.
+- `end_date` (DateTime): End date and time of the election.
+
+## VoteHistory Table
+- `id` (Primary Key, String): Unique identifier for the vote history entry.
+- `user_id` (Foreign Key, String): References the user who casted the vote.
+- `candidate_id` (Foreign Key, String): References the candidate for whom the vote was casted.
+- `timestamp` (DateTime): Timestamp of when the vote was casted.
+
+## UserSession Table
+- `id` (Primary Key, String): Unique identifier for the user session.
+- `user_id` (Foreign Key, String): References the user associated with the session.
+- `token` (String): Authentication token for the session.
+- `expiration_time` (DateTime): Timestamp indicating when the session token will expire.
+
+## AdminSession Table
+- `id` (Primary Key, String): Unique identifier for the admin session.
+- `admin_id` (Foreign Key, String): References the admin associated with the session.
+- `token` (String): Authentication token for the session.
+- `expiration_time` (DateTime): Timestamp indicating when the session token will expire.
+
+## UserProfileHistory Table
+- `id` (Primary Key, String): Unique identifier for the user profile history entry.
+- `user_profile_id` (Foreign Key, String): References the user profile associated with the history.
+- `change_type` (String): Indicates whether it's a profile creation, update, or deletion.
+- `change_timestamp` (DateTime): Timestamp of when the profile change occurred.
+
+## AdminActivityLog Table
+- `id` (Primary Key, String): Unique identifier for the admin activity log entry.
+- `admin_id` (Foreign Key, String): References the admin associated with the activity.
+- `activity` (String): Description of the admin's activity.
+- `timestamp` (DateTime): Timestamp of when the activity occurred.
+
+## gRPC Schema
 
 ### User.proto - Defines messages for user authentication and registration:
 
