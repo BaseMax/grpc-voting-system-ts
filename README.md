@@ -244,6 +244,77 @@ service ProfileService {
 }
 ```
 
+### AuditTrail.proto - Defines messages for audit trail and vote verification:
+
+```protobuf
+syntax = "proto3";
+
+message AuditTrail {
+  string id = 1;
+  string user_id = 2;
+  string candidate_id = 3;
+  string timestamp = 4;
+}
+
+service AuditTrailService {
+  rpc RecordAudit(AuditTrail) returns (AuditTrail);
+  rpc GetUserAuditTrail(string) returns (stream AuditTrail);
+}
+```
+
+### Dashboard.proto - Defines messages for user dashboards:
+
+```protobuf
+syntax = "proto3";
+
+message VoterDashboard {
+  repeated Election active_elections = 1;
+  repeated Notification notifications = 2;
+  UserProfile user_profile = 3;
+}
+
+message AdminDashboard {
+  repeated Election active_elections = 1;
+  repeated Candidate candidates = 2;
+}
+
+service DashboardService {
+  rpc GetVoterDashboard(string) returns (VoterDashboard);
+  rpc GetAdminDashboard(string) returns (AdminDashboard);
+}
+```
+
+### VoteVerification.proto - Defines messages for verifying casted votes:
+
+```protobuf
+syntax = "proto3";
+
+message VoteVerification {
+  string vote_id = 1;
+  bool verified = 2;
+}
+
+service VerificationService {
+  rpc VerifyVote(VoteVerification) returns (VoteVerification);
+  rpc GetVoteVerificationStatus(string) returns (VoteVerification);
+}
+```
+
+### Leaderboard.proto - Defines messages for displaying election leaderboards:
+
+```protobuf
+syntax = "proto3";
+
+message LeaderboardEntry {
+  string candidate_id = 1;
+  int32 vote_count = 2;
+}
+
+service LeaderboardService {
+  rpc GetElectionLeaderboard(string) returns (stream LeaderboardEntry);
+}
+```
+
 ## Contribution
 
 Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to submit a pull request or open an issue.
