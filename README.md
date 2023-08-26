@@ -109,6 +109,141 @@ While not a gRPC-specific command, OpenSSL is often used to manage certificates 
 openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
 ```
 
+## Schema
+
+### User.proto - Defines messages for user authentication and registration:
+
+```protobuf
+syntax = "proto3";
+
+message User {
+  string id = 1;
+  string username = 2;
+  string password = 3;
+}
+
+service UserService {
+  rpc RegisterUser(User) returns (User);
+  rpc AuthenticateUser(User) returns (User);
+}
+```
+
+### Candidate.proto - Defines messages for managing candidates:
+
+```protobuf
+syntax = "proto3";
+
+message Candidate {
+  string id = 1;
+  string name = 2;
+  string party = 3;
+  string campaign_details = 4;
+}
+
+service CandidateService {
+  rpc AddCandidate(Candidate) returns (Candidate);
+  rpc GetCandidates() returns (stream Candidate);
+}
+```
+
+### Election.proto - Defines messages for managing elections and votes:
+
+```protobuf
+syntax = "proto3";
+
+message Election {
+  string id = 1;
+  string title = 2;
+  string start_date = 3;
+  string end_date = 4;
+  bool is_active = 5;
+}
+
+message Vote {
+  string id = 1;
+  string user_id = 2;
+  string candidate_id = 3;
+}
+
+service ElectionService {
+  rpc CreateElection(Election) returns (Election);
+  rpc GetActiveElections() returns (stream Election);
+}
+
+service VoteService {
+  rpc CastVote(Vote) returns (Vote);
+  rpc GetUserVotes(string) returns (stream Vote);
+}
+```
+
+### Notification.proto - Defines messages for sending notifications to users:
+
+```protobuf
+syntax = "proto3";
+
+message Notification {
+  string id = 1;
+  string user_id = 2;
+  string message = 3;
+  string timestamp = 4;
+}
+
+service NotificationService {
+  rpc SendNotification(Notification) returns (Notification);
+  rpc GetUserNotifications(string) returns (stream Notification);
+}
+```
+
+### Admin.proto - Defines messages for administrative actions:
+
+```protobuf
+syntax = "proto3";
+
+message Admin {
+  string id = 1;
+  string username = 2;
+  string password = 3;
+}
+
+service AdminService {
+  rpc AuthenticateAdmin(Admin) returns (Admin);
+  rpc StartElection(string) returns (Election);
+  rpc EndElection(string) returns (Election);
+}
+```
+
+### Result.proto - Defines messages for election results:
+
+```protobuf
+syntax = "proto3";
+
+message ElectionResult {
+  string election_id = 1;
+  string candidate_id = 2;
+  int32 vote_count = 3;
+}
+
+service ResultService {
+  rpc GetElectionResults(string) returns (stream ElectionResult);
+}
+```
+
+### Profile.proto - Defines messages for user profiles:
+
+```protobuf
+syntax = "proto3";
+
+message UserProfile {
+  string id = 1;
+  string username = 2;
+  repeated string vote_ids = 3;
+}
+
+service ProfileService {
+  rpc GetUserProfile(string) returns (UserProfile);
+}
+```
+
 ## Contribution
 
 Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to submit a pull request or open an issue.
