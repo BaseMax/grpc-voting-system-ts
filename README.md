@@ -53,6 +53,29 @@ The gRPC-Based Online Voting System is a web application that allows users to se
 
 4. Access the application in your web browser at `http://localhost:3000`.
 
+## Process
+
+**User Authentication and Registration:** Users should be able to register with their information securely.
+Implement user authentication to ensure that only registered users can access the system.
+**Candidate Management:** Admins should be able to add, edit, and remove candidate profiles.
+Display candidate information including their name, photo, party affiliation, and campaign details.
+**Voter Dashboard:** Voters should have access to a dashboard with information about upcoming elections, candidates, and voting instructions.
+**Voting Process:** Implement a secure and user-friendly process for casting votes. Allow voters to select their preferred candidate from the available options.
+**Real-Time Updates:** Utilize gRPC streaming to provide real-time updates on the current vote count and election progress.
+**Admin Console:** Create an admin console/dashboard for election administrators to manage elections and candidates.
+Admins should have the ability to start, pause, and end elections.
+**Vote Tracking:** Voters should be able to view their submitted votes and verify their authenticity.
+**Audit Trail:** Store an audit trail of all votes casted for transparency and verification purposes.
+**Results Display:** Display election results in real time or after the election concludes.
+Show detailed breakdowns of votes for each candidate.
+**Security Measures:** Implement encryption and security protocols to protect voter data and ensure vote integrity. Prevent duplicate voting and ensure that each voter can only vote once.
+**User Notifications:** Send notifications to voters about upcoming elections, voting deadlines, and results.
+**User Profiles:** Allow users to create profiles, track their voting history, and manage their information.
+**User Support:** Provide user support channels for voters who may have questions or face issues.
+**Documentation and Help:** Include detailed documentation on how to use the platform for both voters and administrators.
+
+**Testing and Debugging:** Ensure thorough testing of the system's functionality and security measures.
+
 ## Commands
 
 1- `protoc`:
