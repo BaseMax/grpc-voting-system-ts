@@ -34,23 +34,23 @@ The gRPC-Based Online Voting System is a web application that allows users to se
 
 2. Install dependencies for both frontend and backend:
 
-```bash
-cd frontend
-npm install
-
-cd ../backend
-npm install
-```
+   ```bash
+   cd frontend
+   npm install
+   
+   cd ../backend
+   npm install
+   ```
 
 3. Start the frontend and backend servers:
-
-```bash
-# Inside the frontend directory
-npm start
-
-# Inside the backend directory
-npm start
-```
+   
+   ```bash
+   # Inside the frontend directory
+   npm start
+   
+   # Inside the backend directory
+   npm start
+   ```
 
 4. Access the application in your web browser at `http://localhost:3000`.
 
