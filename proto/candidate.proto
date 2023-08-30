@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package candidate;
+
+// services
+service CandidateService {
+  rpc AddCandidate(AddCandidateRequest) returns (AddCandidateResponse) {};
+  rpc UpdateCandidate(UpdateCandidateRequest)
+      returns (UpdateCandidateResponse) {};
+  rpc GetOneCandidate(GetOneCandidateRequest)
+      returns (GetOneCandidateResponse) {};
+  rpc GetAllCandidates(GetAllCandidateRequest) returns (stream Candidate) {};
+}
+
+// requests
+message AddCandidateRequest {
+  string name = 1;
+  int32 age = 2;
+  optional string education = 3;
+  optional string website = 4;
+  repeated string socialMedia = 5;
+}
+message UpdateCandidateRequest {
+  string id = 1;
+  optional string name = 2;
+  optional int32 age = 3;
+  optional string education = 4;
+  optional string website = 5;
+  repeated string socialMedia = 6;
+}
+message GetOneCandidateRequest { string id = 1; }
+message GetAllCandidateRequest {}
+
+// responses
+message AddCandidateResponse { optional Candidate candidate = 1; }
+message UpdateCandidateResponse { optional Candidate candidate = 1; }
+message GetOneCandidateResponse { optional Candidate candidate = 1; }
+
+// types
+message Candidate {
+  string id = 1;
+  string name = 2;
+  int32 age = 3;
+  string education = 4;
+  optional string website = 5;
+  repeated string socialMedia = 6;
+}

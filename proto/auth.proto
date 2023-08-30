@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package auth;
+
+service AuthService {
+  rpc login(LoginRequest) returns (LoginResponse) {};
+  rpc register(RegisterRequest) returns (RegisterResponse) {};
+  rpc verifyToken(VerifyTokenRequest) returns (VerifyTokenResponse) {};
+}
+
+// Requests
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message RegisterRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message VerifyTokenRequest { string token = 1; }
+// Responses
+message LoginResponse { optional string token = 1; }
+message RegisterResponse { optional string token = 1; }
+message VerifyTokenResponse { optional User user = 1; }
+
+// Types
+message User {
+  string id = 1;
+  string username = 2;
+  string password = 3;
+  Role role = 4;
+}
+
+enum Role {
+  ADMIN = 0;
+  USER = 1;
+}
