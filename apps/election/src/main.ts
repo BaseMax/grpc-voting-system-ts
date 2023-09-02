@@ -1,18 +1,18 @@
 import { NestFactory } from '@nestjs/core';
-import { CandidateModule } from './candidate.module';
+import { ElectionModule } from './election.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { CANDIDATE_PACKAGE_NAME } from '@app/common';
+import { ELECTION_PACKAGE_NAME } from '@app/common';
 import { join } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    CandidateModule,
+    ElectionModule,
     {
       transport: Transport.GRPC,
       options: {
-        url: '0.0.0.0:3002',
-        package: CANDIDATE_PACKAGE_NAME,
-        protoPath: join(__dirname, '../candidate.proto'),
+        url: '0.0.0.0:3003',
+        package: ELECTION_PACKAGE_NAME,
+        protoPath: join(process.cwd(), 'proto', 'election.proto'),
       },
     },
   );

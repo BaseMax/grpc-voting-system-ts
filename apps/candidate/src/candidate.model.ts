@@ -1,13 +1,16 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import { Candidate as ICandidate } from '@app/common';
+import { Transform } from 'class-transformer';
 
 export type CandidateDocument = HydratedDocument<Candidate>;
 
 @Schema({
   toJSON: {
     getters: true,
+    virtuals: true,
   },
+  virtuals: true,
 })
 export class Candidate implements Omit<ICandidate, 'id'> {
   @Prop({ required: true })
@@ -16,7 +19,7 @@ export class Candidate implements Omit<ICandidate, 'id'> {
   @Prop({ required: true })
   age: number;
 
-  @Prop({ required: true })
+  @Prop()
   education: string;
 
   @Prop()
@@ -26,4 +29,8 @@ export class Candidate implements Omit<ICandidate, 'id'> {
   socialMedia: string[];
 }
 
-export const CandidateSchema = SchemaFactory.createForClass(Candidate);
+const CandidateSchema = SchemaFactory.createForClass(Candidate);
+CandidateSchema.virtual('id').get(function (this: CandidateDocument) {
+  return this._id.toString();
+});
+export { CandidateSchema };

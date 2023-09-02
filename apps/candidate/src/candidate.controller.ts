@@ -3,8 +3,6 @@ import { CandidateService } from './candidate.service';
 import {
   AddCandidateRequest,
   AddCandidateResponse,
-  Candidate,
-  CandidateServiceController,
   CandidateServiceControllerMethods,
   GetAllCandidateRequest,
   GetOneCandidateRequest,
@@ -12,11 +10,10 @@ import {
   UpdateCandidateRequest,
   UpdateCandidateResponse,
 } from '@app/common';
-import { Observable } from 'rxjs';
 
 @Controller()
 @CandidateServiceControllerMethods()
-export class CandidateController implements CandidateServiceController {
+export class CandidateController {
   constructor(private readonly candidateService: CandidateService) {}
 
   addCandidate(request: AddCandidateRequest): Promise<AddCandidateResponse> {
@@ -35,8 +32,7 @@ export class CandidateController implements CandidateServiceController {
     return this.candidateService.getOneCandidate(request);
   }
 
-  getAllCandidates(request: GetAllCandidateRequest): Observable<Candidate> {
-    throw new Error('Method Not implemented');
-    // return this.candidateService.getAllCandidates(request);
+  getAllCandidates(request: GetAllCandidateRequest) {
+    return this.candidateService.getAllCandidates(request);
   }
 }

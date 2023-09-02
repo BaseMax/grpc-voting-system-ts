@@ -36,6 +36,19 @@
         "watchAssets": true
       }
     },
+    "candidate": {
+      "type": "application",
+      "root": "apps/candidate",
+      "entryFile": "src/main",
+      "sourceRoot": "./",
+      "compilerOptions": {
+        "tsConfigPath": "apps/candidate/tsconfig.app.json",
+        "assets": [
+          "proto/*.proto"
+        ],
+        "watchAssets": true
+      }
+    },
     "common": {
       "type": "library",
       "root": "libs/common",
@@ -45,13 +58,13 @@
         "tsConfigPath": "libs/common/tsconfig.lib.json"
       }
     },
-    "candidate": {
+    "election": {
       "type": "application",
-      "root": "apps/candidate",
+      "root": "apps/election",
       "entryFile": "main",
-      "sourceRoot": "apps/candidate/src",
+      "sourceRoot": "apps/election/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/candidate/tsconfig.app.json"
+        "tsConfigPath": "apps/election/tsconfig.app.json"
       }
     }
   }

@@ -9,7 +9,8 @@ service CandidateService {
       returns (UpdateCandidateResponse) {};
   rpc GetOneCandidate(GetOneCandidateRequest)
       returns (GetOneCandidateResponse) {};
-  rpc GetAllCandidates(GetAllCandidateRequest) returns (stream Candidate) {};
+  rpc GetAllCandidates(GetAllCandidateRequest)
+      returns (GetAllCandidateResponse) {};
 }
 
 // requests
@@ -35,13 +36,14 @@ message GetAllCandidateRequest {}
 message AddCandidateResponse { optional Candidate candidate = 1; }
 message UpdateCandidateResponse { optional Candidate candidate = 1; }
 message GetOneCandidateResponse { optional Candidate candidate = 1; }
+message GetAllCandidateResponse { repeated Candidate candidates = 1; }
 
 // types
 message Candidate {
   string id = 1;
   string name = 2;
   int32 age = 3;
-  string education = 4;
+  optional string education = 4;
   optional string website = 5;
   repeated string socialMedia = 6;
 }

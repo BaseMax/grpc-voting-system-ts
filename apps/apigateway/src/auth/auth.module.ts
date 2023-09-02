@@ -14,7 +14,7 @@ import { JwtGuard, RolesGuard } from './guard';
         name: 'AUTH_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          url: process.env['auth_service'],
+          url: '0.0.0.0:3001',
           package: AUTH_PACKAGE_NAME,
           protoPath: join(process.cwd(), 'proto', 'auth.proto'),
         },
@@ -23,5 +23,18 @@ import { JwtGuard, RolesGuard } from './guard';
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtGuard, RolesGuard],
+  exports: [
+    ClientsModule.register([
+      {
+        name: 'AUTH_PACKAGE',
+        transport: Transport.GRPC,
+        options: {
+          url: process.env['auth_service'],
+          package: AUTH_PACKAGE_NAME,
+          protoPath: join(process.cwd(), 'proto', 'auth.proto'),
+        },
+      },
+    ]),
+  ],
 })
 export class AuthModule {}

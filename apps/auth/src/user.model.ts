@@ -7,6 +7,7 @@ export type UserDocument = HydratedDocument<User>;
 @Schema({
   toJSON: {
     getters: true,
+    virtuals: true,
   },
 })
 export class User implements Omit<IUser, 'id'> {
@@ -23,6 +24,13 @@ export class User implements Omit<IUser, 'id'> {
     default: Role.UNRECOGNIZED,
   })
   role: Role;
+
+  id: string;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
+const UserSchema = SchemaFactory.createForClass(User);
+UserSchema.virtual('id').get(function (this: UserDocument) {
+  return this._id.toString();
+});
+
+export { UserSchema };

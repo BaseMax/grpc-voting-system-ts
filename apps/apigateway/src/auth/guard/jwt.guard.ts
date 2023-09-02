@@ -37,7 +37,7 @@ export class JwtGuard implements CanActivate, OnModuleInit {
     return true;
   }
   private attachPayload(context: ExecutionContext, payload: any) {
-    context.switchToHttp().getRequest().user = payload;
+    context.switchToHttp().getRequest().user = payload.user;
   }
 
   private extractToken(context: ExecutionContext) {

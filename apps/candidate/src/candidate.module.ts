@@ -4,6 +4,8 @@ import { CandidateService } from './candidate.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Candidate, CandidateSchema } from './candidate.model';
+import { APP_FILTER } from '@nestjs/core';
+import { GrpcServerExceptionFilter } from 'nestjs-grpc-exceptions';
 
 @Module({
   imports: [
@@ -13,7 +15,7 @@ import { Candidate, CandidateSchema } from './candidate.model';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('auth_db'),
+        uri: configService.get<string>('candidate_db'),
       }),
       inject: [ConfigService],
     }),
@@ -22,6 +24,12 @@ import { Candidate, CandidateSchema } from './candidate.model';
     ]),
   ],
   controllers: [CandidateController],
-  providers: [CandidateService],
+  providers: [
+    CandidateService,
+    {
+      provide: APP_FILTER,
+      useClass: GrpcServerExceptionFilter,
+    },
+  ],
 })
 export class CandidateModule {}

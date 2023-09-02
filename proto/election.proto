@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package election;
+
+// services
+service ElectionService {
+  rpc createElection(CreateElectionRequest) returns (CreateELectionResponse) {};
+  rpc getAllElections(GetAllElectionRequest) returns (GetAllElectionResponse) {
+  };
+  rpc getElectionById(GetElectionByIdRequest)
+      returns (GetElectionByIdResponse) {};
+  rpc updateElection(UpdateElectionRequest) returns (UpdateElectionResponse) {};
+  rpc deleteElection(DeleteElectionRequest) returns (DeleteElectionResponse) {};
+}
+
+// requests
+message CreateElectionRequest {
+  string title = 1;
+  string startDate = 2;
+  string endDate = 3;
+  bool isActive = 4;
+}
+message GetAllElectionRequest {}
+message GetElectionByIdRequest { string id = 1; }
+message UpdateElectionRequest {
+  string id = 1;
+  string title = 2;
+  string startDate = 3;
+  string endDate = 4;
+  bool isActive = 5;
+}
+message DeleteElectionRequest { string id = 1; }
+
+// responses
+message CreateELectionResponse { optional Election election = 1; }
+message GetElectionByIdResponse { optional Election election = 1; }
+message UpdateElectionResponse { optional Election election = 1; }
+message DeleteElectionResponse { int32 deletedCount = 1; }
+message GetAllElectionResponse { repeated Election elections = 1; }
+
+// typee
+message Election {
+  string id = 1;
+  string title = 2;
+  string startDate = 3;
+  string endDate = 4;
+  bool isActive = 5;
+}

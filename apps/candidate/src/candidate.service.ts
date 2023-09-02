@@ -1,7 +1,6 @@
 import {
   AddCandidateRequest,
   AddCandidateResponse,
-  Candidate,
   GetAllCandidateRequest,
   GetOneCandidateRequest,
   GetOneCandidateResponse,
@@ -16,7 +15,6 @@ import {
   GrpcAlreadyExistsException,
   GrpcNotFoundException,
 } from 'nestjs-grpc-exceptions';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class CandidateService {
@@ -31,6 +29,8 @@ export class CandidateService {
     const existCandidates = await this.candidateModel.findOne({
       name: request.name,
     });
+    console.log('ADD CANDIDATE SERVICE');
+
     if (existCandidates)
       throw new GrpcAlreadyExistsException(
         'a candidate already exists with this name',
@@ -45,8 +45,9 @@ export class CandidateService {
     const existCandidate = await this.candidateModel.findById(request.id);
     if (!existCandidate) throw new GrpcNotFoundException('candidate not found');
     const candidate = await this.candidateModel.findOneAndUpdate(
-      { id: request.id },
+      { _id: request.id },
       request,
+      { new: true },
     );
     return { candidate: candidate.toJSON() };
   }
@@ -58,10 +59,13 @@ export class CandidateService {
     return { candidate: candidate ? candidate.toJSON() : null };
   }
 
-  // async getAllCandidates(
-  //   request: GetAllCandidateRequest,
-  // ): Observable<Candidate> {
-  //   const candidates = await this.candidateModel.find(request);
-  //   return { candidate: candidates };
-  // }
+  async getAllCandidates(request: GetAllCandidateRequest) {
+    const candidates = await this.candidateModel.find(
+      request,
+      {},
+      { lean: true },
+    );
+
+    return { candidates };
+  }
 }

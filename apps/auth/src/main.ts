@@ -5,14 +5,16 @@ import { AUTH_PACKAGE_NAME } from '@app/common';
 import { join } from 'path';
 
 async function bootstrap() {
+  console.log(process.env['auth_service'], 'AUTH');
+
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AuthModule,
     {
       transport: Transport.GRPC,
       options: {
-        url: process.env['service_url'],
+        url: '0.0.0.0:3001', // process.env['auth_service'],
         package: AUTH_PACKAGE_NAME,
-        protoPath: join(__dirname, '../auth.proto'),
+        protoPath: join(process.cwd(), 'proto', 'auth.proto'),
       },
     },
   );

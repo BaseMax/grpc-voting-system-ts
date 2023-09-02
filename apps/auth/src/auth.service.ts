@@ -43,8 +43,7 @@ export class AuthService {
   }
 
   async login(request: LoginRequest) {
-    const user = await this.findUserByUsername(request.password);
-
+    const user = await this.findUserByUsername(request.username);
     if (!user) throw new GrpcUnauthenticatedException('wrong credentials');
 
     const isPasswordCorrect = await bcrypt.compare(

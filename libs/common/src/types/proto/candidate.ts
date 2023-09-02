@@ -39,12 +39,16 @@ export interface GetOneCandidateResponse {
   candidate?: Candidate | undefined;
 }
 
+export interface GetAllCandidateResponse {
+  candidates: Candidate[];
+}
+
 /** types */
 export interface Candidate {
   id: string;
   name: string;
   age: number;
-  education: string;
+  education?: string | undefined;
   website?: string | undefined;
   socialMedia: string[];
 }
@@ -64,7 +68,9 @@ export interface CandidateServiceClient {
     request: GetOneCandidateRequest,
   ): Observable<GetOneCandidateResponse>;
 
-  getAllCandidates(request: GetAllCandidateRequest): Observable<Candidate>;
+  getAllCandidates(
+    request: GetAllCandidateRequest,
+  ): Observable<GetAllCandidateResponse>;
 }
 
 /** services */
@@ -91,7 +97,12 @@ export interface CandidateServiceController {
     | Observable<GetOneCandidateResponse>
     | GetOneCandidateResponse;
 
-  getAllCandidates(request: GetAllCandidateRequest): Observable<Candidate>;
+  getAllCandidates(
+    request: GetAllCandidateRequest,
+  ):
+    | Promise<GetAllCandidateResponse>
+    | Observable<GetAllCandidateResponse>
+    | GetAllCandidateResponse;
 }
 
 export function CandidateServiceControllerMethods() {

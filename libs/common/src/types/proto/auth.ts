@@ -2,8 +2,6 @@
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
 
-export const protobufPackage = "auth";
-
 export enum Role {
   ADMIN = 0,
   USER = 1,

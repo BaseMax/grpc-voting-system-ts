@@ -4,7 +4,6 @@ import {
   Post,
   Body,
   Param,
-  Delete,
   UseInterceptors,
   Put,
   UseGuards,
@@ -35,7 +34,7 @@ export class CandidateController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.candidateService.findOne(+id);
+    return this.candidateService.findOne(id);
   }
 
   @UseGuards(RolesGuard)
@@ -45,13 +44,6 @@ export class CandidateController {
     @Param('id') id: string,
     @Body() updateCandidateDto: UpdateCandidateDto,
   ) {
-    return this.candidateService.update(+id, updateCandidateDto);
-  }
-
-  @UseGuards(RolesGuard)
-  @Roles(Role.ADMIN)
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.candidateService.remove(+id);
+    return this.candidateService.update(id, updateCandidateDto);
   }
 }
