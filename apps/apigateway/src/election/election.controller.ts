@@ -15,11 +15,28 @@ import { UpdateElectionDto } from './dto/update-election.dto';
 import { GrpcToHttpInterceptor } from 'nestjs-grpc-exceptions';
 import { JwtGuard, Roles, RolesGuard } from '../auth/guard';
 import { Role } from '@app/common';
+import { CurrentUser } from '../auth/decorator';
+import { VoteCandidateDto } from './dto/vote-candidate.dto';
 
 @Controller('election')
 @UseInterceptors(GrpcToHttpInterceptor)
 export class ElectionController {
-  constructor(private readonly electionService: ElectionService) {}
+  constructor(private readonly electionService: ElectionService) { }
+
+  @UseGuards(JwtGuard)
+  @Post('vote')
+  voteCandidate(@Body() request: VoteCandidateDto, @CurrentUser() user: any) {
+    return this.electionService.voteCandidate(request, user.id);
+  }
+
+
+  @UseGuards(JwtGuard, RolesGuard)
+  @Roles(Role.ADMIN)
+  @Get('vote/:voteId')
+  getVote(@Param('voteId') id: string) {
+    return this.electionService.getVote(id)
+  }
+
 
   @UseGuards(JwtGuard, RolesGuard)
   @Roles(Role.ADMIN)

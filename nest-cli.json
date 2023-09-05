@@ -66,6 +66,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/election/tsconfig.app.json"
       }
+    },
+    "vote": {
+      "type": "application",
+      "root": "apps/vote",
+      "entryFile": "main",
+      "sourceRoot": "apps/vote/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/vote/tsconfig.app.json"
+      }
     }
   }
 }

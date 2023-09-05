@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package vote;
+
+//services
+service VoteService {
+    rpc VoteCandidate(VoteCandidateRequest) returns (VoteCandidateResponse) {};
+    rpc GetVote(GetVoteRequest) returns (GetVoteReponse) {};
+  }
+
+
+
+//requests
+message VoteCandidateRequest {
+    string candidateId = 1;
+    string electionId = 2;
+    string userId = 3;
+  }
+
+message GetVoteRequest {
+    string id = 1;
+  }
+
+//responses
+message VoteCandidateResponse {
+    bool isVoteRegister = 1;
+  }
+
+message GetVoteReponse {
+    string id = 1;
+    string candidateId = 2;
+    string electionId = 3;
+    string userId = 4;
+  }
+
+
+
+// types
+message Vote {
+    string id = 1;
+    string candidateId = 2;
+    string electionId = 3;
+    string userId = 4;
+  }
