@@ -21,7 +21,7 @@ export class CandidateService {
   constructor(
     @InjectModel(CandidateModel.name)
     private candidateModel: Model<CandidateModel>,
-  ) {}
+  ) { }
 
   async addCandidate(
     request: AddCandidateRequest,
@@ -29,7 +29,6 @@ export class CandidateService {
     const existCandidates = await this.candidateModel.findOne({
       name: request.name,
     });
-    console.log('ADD CANDIDATE SERVICE');
 
     if (existCandidates)
       throw new GrpcAlreadyExistsException(
@@ -56,7 +55,8 @@ export class CandidateService {
     request: GetOneCandidateRequest,
   ): Promise<GetOneCandidateResponse> {
     const candidate = await this.candidateModel.findById(request.id);
-    return { candidate: candidate ? candidate.toJSON() : null };
+    if (!candidate) throw new GrpcNotFoundException('candidate not found');
+    return { candidate: candidate.toJSON() };
   }
 
   async getAllCandidates(request: GetAllCandidateRequest) {

@@ -1,7 +1,9 @@
 import { AddCandidateRequest } from '@app/common';
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class CreateCandidateDto implements AddCandidateRequest {
+export class CreateCandidateDto
+  implements Omit<AddCandidateRequest, 'socialMedia'>
+{
   @IsNotEmpty()
   @IsString()
   name: string;
@@ -19,9 +21,4 @@ export class CreateCandidateDto implements AddCandidateRequest {
   @IsString()
   @IsOptional()
   website?: string;
-
-  @IsNotEmpty({ each: true })
-  @IsString({ each: true })
-  @IsOptional()
-  socialMedia: string[];
 }
