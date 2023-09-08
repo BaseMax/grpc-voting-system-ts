@@ -3,20 +3,24 @@
 The gRPC-Based Online Voting System is a web application that allows users to participate in elections and cast their votes online. This project utilizes gRPC technology to enable offer services accessible from various locations.
 
 ## Demo
-[diagram]('./screenshots/diagram.png')
-![postman-endpoints]('./screenshots/postman_ends.png')
-![register](./screenshots/register.png)
-![invalid register](./screenshots/invalid_register.png)
-![login](./screenshots/login.png)
-![invalid_login]('./screenshots/invalid_login.png')
-![unauthorized]('./screenshots/not_verified.png')
-![only admin]('./screenshots/only_admin.png')
-![add_candidate]('./screenshots/add_candidate.png')
-![invalid_add_candidate]('./screenshots/invalid_add_candidate.png')
-![get_candidate]('./screenshots/get_candidate.png')
-![get all candidates]('./screenshots/get_all_candidates.png')
-![only_admin_create_election]('./screenshots/only_admin_create_election.png')
-![create_election]('./screenshots/create_election.png')
+
+| Title                          | Picture                                                                     |
+| ------------------------------ | --------------------------------------------------------------------------- |
+| diagram                        | ![diagram](./screenshots/diagram.png)                                       |
+| postman end-points             | '![postman-endpoints](./screenshots/postman_ends.png)                       |
+| register                       | ![register](./screenshots/register.png)                                     |
+| invalid register               | ![invalid register](./screenshots/invalid_register.png)                     |
+| login                          | ![login](./screenshots/login.png)                                           |
+| invalid login                  | ![invalid_login](./screenshots/invalid_login.png)                           |
+| unauthorized access            | ![unauthorized](./screenshots/not_verified.png)                             |
+| forbidden access               | ![only admin](./screenshots/only_admin.png)                                 |
+| add candidate                  | ![add_candidate](./screenshots/add_candidate.png)                           |
+| invalid add candidate          | ![invalid_add_candidate](./screenshots/invalid_add_candidate.png)           |
+| get candidate                  | ![get_candidate](./screenshots/get_candidate.png)                           |
+| get all candidate              | ![get all candidates](./screenshots/get_all_candidates.png)                 |
+| only admin can create election | ![only_admin_create_election](./screenshots/only_admin_create_election.png) |
+| create election                | ![create_election](./screenshots/create_election.png)                       |
+
 ## Features
 
 - **Voter Registration:** Users can register as voters by providing required details and authentication.
@@ -44,12 +48,14 @@ The gRPC-Based Online Voting System is a web application that allows users to pa
    ```
 
 2. Install dependencies for both frontend and backend:
+
    ```bash
    cd ../backend
    npm install
    ```
 
 3. Start the frontend and backend servers:
+
    ```bash
    npm run start:dev auth
    npm run start:dev candidate
@@ -60,35 +66,48 @@ The gRPC-Based Online Voting System is a web application that allows users to pa
 
 4. Access the application in your web browser at `http://localhost:3000`.
 
+## Test
+
+to run e2e test first start up all services and apigateway then:
+
+```bash
+pnpm run test:e2e
+```
+
 ## Services
+
 **Auth Service**:
+
 - login: user can login with correct credentials.
 - register: user can register with correct credentials.
 - verify: this method verify token is valid or not.
-**Candidate Service**:
+  **Candidate Service**:
 - addCandidate: admin can add candidate to the election
 - updateCandidate: admin can update candidate information
 - getAll: user or admin can get information of all candidates
 - getOne: user or admin can get information of specific candidate
-**Eelection Service**:
+  **Eelection Service**:
 - createElection: admin can create election
 - getAll: user or admin can get all elections informations
 - getOne: user or admin can get specific election informations
 - update: admin can update election information (start/stop election, change start/end Date, add/remove candidate)
-**Vote Service**:
+  **Vote Service**:
 - vote: user can vote to a candidate of election
 - getVote: admin can check vote informations
+
 ## Process
 
 - **User Authentication and Registration:** Users should be able to register with their information securely. Implement user authentication to ensure that only registered users can access the system.
-- **Candidate Management:** Admins should be able to add, edit, and remove candidate. Display candidate information including their name and other details. 
+- **Candidate Management:** Admins should be able to add, edit, and remove candidate. Display candidate information including their name and other details.
 - **Voter Dashboard:** Voters should have access to a dashboard with information about upcoming elections, candidates, and voting instructions.
 - **Voting Process:** Implement a secure and user-friendly process for casting votes. Allow voters to select their preferred candidate from the available options.
 - **Admin Console:** Create an admin console/dashboard for election administrators to manage elections and candidates. Admins should have the ability to start, pause, and end elections.
 - **Results Display:** Display election results in real time or after the election concludes. Show detailed breakdowns of votes for each candidate.
 
 ## Commands
+
 convert protobuff to typescript (ready for nestjs)
+
 ```bash
 protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./libs/common/src/types --ts_proto_opt=nestJs=true ./proto/vote.proto
 ```
