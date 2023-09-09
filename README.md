@@ -2,7 +2,7 @@
 
 The gRPC-Based Online Voting System is a web application that allows users to participate in elections and cast their votes online. This project utilizes gRPC technology to enable offer services accessible from various locations.
 
-## Demo
+## Demo Voting System
 
 | Title                          | Picture                                                                     |
 | ------------------------------ | --------------------------------------------------------------------------- |
@@ -70,9 +70,9 @@ The gRPC-Based Online Voting System is a web application that allows users to pa
 
 to run e2e test first start up all services and apigateway then:
 
-```bash
-pnpm run test:e2e
-```
+   ```bash
+   pnpm run test:e2e
+   ```
 
 ## Services
 
@@ -106,11 +106,11 @@ pnpm run test:e2e
 
 ## Commands
 
-convert protobuff to typescript (ready for nestjs)
+Convert protobuff to typescript (ready for nestjs)
 
-```bash
-protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./libs/common/src/types --ts_proto_opt=nestJs=true ./proto/vote.proto
-```
+   ```bash
+   protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./libs/common/src/types --ts_proto_opt=nestJs=true ./proto/vote.proto
+   ```
 
 ## Contribution
 
