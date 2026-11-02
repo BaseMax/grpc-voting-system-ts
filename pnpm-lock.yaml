@@ -37,7 +37,7 @@ importers:
         version: 11.1.19(@grpc/grpc-js@1.9.15)(@nestjs/common@11.0.16(class-transformer@0.5.1)(class-validator@0.14.0)(file-type@20.4.1(supports-color@8.1.1))(reflect-metadata@0.1.13)(rxjs@7.8.1))(@nestjs/core@11.1.18)(reflect-metadata@0.1.13)(rxjs@7.8.1)
       '@nestjs/mongoose':
         specifier: ^10.0.1
-        version: 10.0.1(@nestjs/common@11.0.16(class-transformer@0.5.1)(class-validator@0.14.0)(file-type@20.4.1(supports-color@8.1.1))(reflect-metadata@0.1.13)(rxjs@7.8.1))(@nestjs/core@11.1.18)(mongoose@8.22.1(socks@2.7.1)(supports-color@8.1.1))(reflect-metadata@0.1.13)(rxjs@7.8.1)
+        version: 10.0.1(@nestjs/common@11.0.16(class-transformer@0.5.1)(class-validator@0.14.0)(file-type@20.4.1(supports-color@8.1.1))(reflect-metadata@0.1.13)(rxjs@7.8.1))(@nestjs/core@11.1.18)(mongoose@8.24.1(socks@2.7.1)(supports-color@8.1.1))(reflect-metadata@0.1.13)(rxjs@7.8.1)
       '@nestjs/platform-express':
         specifier: ^10.0.0
         version: 10.0.0(@nestjs/common@11.0.16(class-transformer@0.5.1)(class-validator@0.14.0)(file-type@20.4.1(supports-color@8.1.1))(reflect-metadata@0.1.13)(rxjs@7.8.1))(@nestjs/core@11.1.18)(supports-color@8.1.1)
@@ -54,8 +54,8 @@ importers:
         specifier: link:@types/@faker-js/faker
         version: link:@types/@faker-js/faker
       mongoose:
-        specifier: ^8.22.1
-        version: 8.22.1(socks@2.7.1)(supports-color@8.1.1)
+        specifier: ^8.24.1
+        version: 8.24.1(socks@2.7.1)(supports-color@8.1.1)
       nestjs-grpc-exceptions:
         specifier: ^0.2.1
         version: 0.2.1(@grpc/grpc-js@1.9.15)(@nestjs/common@11.0.16(class-transformer@0.5.1)(class-validator@0.14.0)(file-type@20.4.1(supports-color@8.1.1))(reflect-metadata@0.1.13)(rxjs@7.8.1))(@nestjs/core@11.1.18)(@nestjs/microservices@11.1.19)
@@ -3118,8 +3118,8 @@ packages:
       socks:
         optional: true
 
-  mongoose@8.22.1:
-    resolution: {integrity: sha512-c0bzt7ElI1CwWiyFSgg9bfhlFcblAoPwr+gmDcLCryClyKaeixWhP9KDGnr13kRPE8KPAuUN3ZZ3jSDxSPvoTg==}
+  mongoose@8.24.1:
+    resolution: {integrity: sha512-UpHBA0l5kHyKJQFjmBaFYQFo5sgz1DK0TRqDkOyBLYbqiIbKKhIvBpHWBXqeo0rgW4kGI1UhhAw+kTQZoj1BdA==}
     engines: {node: '>=16.20.1'}
 
   mpath@0.9.0:
@@ -5003,11 +5003,11 @@ snapshots:
     optionalDependencies:
       '@grpc/grpc-js': 1.9.15
 
-  '@nestjs/mongoose@10.0.1(@nestjs/common@11.0.16(class-transformer@0.5.1)(class-validator@0.14.0)(file-type@20.4.1(supports-color@8.1.1))(reflect-metadata@0.1.13)(rxjs@7.8.1))(@nestjs/core@11.1.18)(mongoose@8.22.1(socks@2.7.1)(supports-color@8.1.1))(reflect-metadata@0.1.13)(rxjs@7.8.1)':
+  '@nestjs/mongoose@10.0.1(@nestjs/common@11.0.16(class-transformer@0.5.1)(class-validator@0.14.0)(file-type@20.4.1(supports-color@8.1.1))(reflect-metadata@0.1.13)(rxjs@7.8.1))(@nestjs/core@11.1.18)(mongoose@8.24.1(socks@2.7.1)(supports-color@8.1.1))(reflect-metadata@0.1.13)(rxjs@7.8.1)':
     dependencies:
       '@nestjs/common': 11.0.16(class-transformer@0.5.1)(class-validator@0.14.0)(file-type@20.4.1(supports-color@8.1.1))(reflect-metadata@0.1.13)(rxjs@7.8.1)
       '@nestjs/core': 11.1.18(@nestjs/common@11.0.16(class-transformer@0.5.1)(class-validator@0.14.0)(file-type@20.4.1(supports-color@8.1.1))(reflect-metadata@0.1.13)(rxjs@7.8.1))(@nestjs/microservices@11.1.19)(@nestjs/platform-express@10.0.0)(reflect-metadata@0.1.13)(rxjs@7.8.1)
-      mongoose: 8.22.1(socks@2.7.1)(supports-color@8.1.1)
+      mongoose: 8.24.1(socks@2.7.1)(supports-color@8.1.1)
       reflect-metadata: 0.1.13
       rxjs: 7.8.1
 
@@ -7548,7 +7548,7 @@ snapshots:
     optionalDependencies:
       socks: 2.7.1
 
-  mongoose@8.22.1(socks@2.7.1)(supports-color@8.1.1):
+  mongoose@8.24.1(socks@2.7.1)(supports-color@8.1.1):
     dependencies:
       bson: 6.10.4
       kareem: 2.6.3
